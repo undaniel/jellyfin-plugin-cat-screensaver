@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0.7
+
+- Show the configuration page in the dashboard sidebar.
+
 ## 1.0.0.6
 
 - Keep the sleeping cats breathing with `prefers-reduced-motion: reduce`.
