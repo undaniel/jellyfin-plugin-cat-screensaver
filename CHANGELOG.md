@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0.4
+
+- Prefer the Jellyfin 12.4 user menu over the hidden legacy drawer, so the opt-out
+  entry is visible.
+
 ## 1.0.0.3
 
 - Add the opt-out entry to the Jellyfin 12.4 MUI user menu (inside `.MuiMenu-list`).

@@ -8,7 +8,7 @@ import {
 } from './idle.js';
 import { Overlay } from './overlay.js';
 
-const VERSION = '1.0.0.3';
+const VERSION = '1.0.0.4';
 const BOOTED_KEY = '__catScreensaverBooted';
 const STORAGE_KEY = 'catScreensaver.disabled';
 const MENU_ATTRIBUTE = 'data-cat-screensaver-toggle';
@@ -202,12 +202,14 @@ function ensureUserMenu() {
             return;
         }
 
-        const container = document.querySelector('.mainDrawer-scrollContainer')
+        // Prefer the 12.4 MUI user menu; the legacy drawer still exists but is
+        // hidden behind the new shell.
+        const container = document.querySelector('#app-user-menu .MuiMenu-list')
+            || document.querySelector('#app-user-menu')
+            || document.querySelector('.mainDrawer-scrollContainer')
             || document.querySelector('.mainDrawer .scrollContainer')
             || document.querySelector('.navMenuItems')
-            || document.querySelector('#userMenu')
-            || document.querySelector('#app-user-menu .MuiMenu-list')
-            || document.querySelector('#app-user-menu');
+            || document.querySelector('#userMenu');
 
         if (!container) {
             return;
