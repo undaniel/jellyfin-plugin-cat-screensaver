@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0.2
+
+- Never inject the script into JavaScript chunks whose name matches the `index.html` regex;
+  only inject into a document with a closing body tag.
+
 ## 1.0.0.1
 
 - First release.

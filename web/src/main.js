@@ -8,7 +8,7 @@ import {
 } from './idle.js';
 import { Overlay } from './overlay.js';
 
-const VERSION = '1.0.0.1';
+const VERSION = '1.0.0.2';
 const BOOTED_KEY = '__catScreensaverBooted';
 const STORAGE_KEY = 'catScreensaver.disabled';
 const MENU_ATTRIBUTE = 'data-cat-screensaver-toggle';
@@ -205,15 +205,25 @@ function ensureUserMenu() {
         const container = document.querySelector('.mainDrawer-scrollContainer')
             || document.querySelector('.mainDrawer .scrollContainer')
             || document.querySelector('.navMenuItems')
-            || document.querySelector('#userMenu');
+            || document.querySelector('#userMenu')
+            || document.querySelector('#app-user-menu');
 
         if (!container) {
             return;
         }
 
-        const item = document.createElement('a');
-        item.href = '#';
-        item.className = 'navMenuOption';
+        // Jellyfin 12.4 uses a MUI Menu (a list of role=menuitem li nodes);
+        // older versions use an anchor inside the side drawer.
+        const isMuiMenu = container.id === 'app-user-menu';
+        const item = document.createElement(isMuiMenu ? 'li' : 'a');
+        if (!isMuiMenu) {
+            item.href = '#';
+            item.className = 'navMenuOption';
+        } else {
+            item.setAttribute('role', 'menuitem');
+            item.tabIndex = -1;
+            item.style.cssText = 'display:flex;align-items:center;padding:8px 16px;cursor:pointer;font-size:.875rem;';
+        }
         item.setAttribute(MENU_ATTRIBUTE, '1');
         item.textContent = menuLabel();
         item.addEventListener('click', toggleOptOut);

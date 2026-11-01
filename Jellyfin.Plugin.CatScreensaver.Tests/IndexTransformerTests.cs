@@ -32,13 +32,21 @@ public class IndexTransformerTests
     }
 
     [Fact]
-    public void AppendsWhenThereIsNoBodyTag()
+    public void LeavesNonDocumentChunksUntouched()
     {
-        var result = Transform("<html><div>fragment</div></html>");
+        // "index.html" is also used as a regex by File Transformation, so this
+        // login chunk matches the key. Injecting here breaks the login page.
+        const string chunk = "\"use strict\";(self.webpackChunk=self.webpackChunk||[]).push([[1],{2:function(){}}]);";
 
-        Assert.Contains("cat-screensaver.js", result);
-        Assert.True(result.IndexOf("<script", StringComparison.Ordinal)
-            > result.IndexOf("</html>", StringComparison.Ordinal));
+        Assert.Equal(chunk, Transform(chunk));
+    }
+
+    [Fact]
+    public void LeavesFragmentsWithoutBodyUntouched()
+    {
+        const string fragment = "<html><div>fragment</div></html>";
+
+        Assert.Equal(fragment, Transform(fragment));
     }
 
     [Fact]

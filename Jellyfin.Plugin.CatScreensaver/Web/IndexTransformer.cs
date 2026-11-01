@@ -49,12 +49,19 @@ public static class IndexTransformer
             return html;
         }
 
+        var bodyEnd = html.LastIndexOf("</body>", StringComparison.OrdinalIgnoreCase);
+        if (bodyEnd < 0)
+        {
+            // File Transformation uses every registration key as a regex too, so
+            // "index.html" also matches chunks such as
+            // "session-login-index-html.<hash>.chunk.js". Those are JavaScript and
+            // must never receive a script tag; only a real document has a body.
+            return html;
+        }
+
         var version = typeof(Plugin).Assembly.GetName().Version?.ToString() ?? "1.0.0.0";
         var tag = $"<script src=\"../CatScreensaver/cat-screensaver.js?v={version}\" defer></script>";
 
-        var bodyEnd = html.LastIndexOf("</body>", StringComparison.OrdinalIgnoreCase);
-        return bodyEnd >= 0
-            ? html.Insert(bodyEnd, tag + Environment.NewLine)
-            : html + Environment.NewLine + tag;
+        return html.Insert(bodyEnd, tag + Environment.NewLine);
     }
 }
