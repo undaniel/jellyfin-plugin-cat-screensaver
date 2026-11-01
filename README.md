@@ -23,8 +23,10 @@ interface.
 | Jellyfin Android app | ✅ (expected) | Embeds jellyfin-web in a WebView |
 | Android TV, Swiftfin, Roku, webOS native, Kodi | ❌ | Native UI, does not load jellyfin-web |
 
-Only desktop browsers and the Firefox-based test environment have been exercised here.
-The Media Player and Android rows are still marked as expected; please report results.
+Tested with Chromium 156 (Playwright) against Jellyfin **12.4.0** with File
+Transformation **3.0.3.0**: login, script injection, idle activation, preview button,
+click swallowing and video blocking. Firefox was used for the standalone demo and the
+screenshots. The Media Player and Android rows remain expected; please report results.
 
 ## Requirements
 

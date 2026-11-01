@@ -52,7 +52,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
             {
                 Name = "CatScreensaver",
                 DisplayName = "Cat Screensaver",
-                MenuIcon = "pets",
+                MenuIcon = "nightlight",
                 EnableInMainMenu = false,
                 EmbeddedResourcePath = string.Format(
                     CultureInfo.InvariantCulture,

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0.3
+
+- Add the opt-out entry to the Jellyfin 12.4 MUI user menu (inside `.MuiMenu-list`).
+- Use the `nightlight` icon so it does not collide with Content Warnings.
+
 ## 1.0.0.2
 
 - Never inject the script into JavaScript chunks whose name matches the `index.html` regex;
