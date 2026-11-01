@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0.6
+
+- Keep the sleeping cats breathing with `prefers-reduced-motion: reduce`.
+
 ## 1.0.0.5
 
 - Close the user menu after the opt-out toggle, and remove the entry if the admin

@@ -192,18 +192,24 @@ export class CatEngine {
     }
 
     update(dt) {
-        if (!this.reducedMotion) {
-            const context = { tired: this.activeSeconds > 10 * 60 };
-
+        if (this.reducedMotion) {
+            // No walking, but the sleeping sprite still breathes.
             for (const cat of this.cats) {
-                update(cat, dt, {
-                    minX: 40 * cat.scale,
-                    maxX: this.width - 40 * cat.scale
-                }, this.rng, context);
+                cat.elapsed += dt;
             }
-
-            separateCats(this.cats, this.rng, 80);
+            return;
         }
+
+        const context = { tired: this.activeSeconds > 10 * 60 };
+
+        for (const cat of this.cats) {
+            update(cat, dt, {
+                minX: 40 * cat.scale,
+                maxX: this.width - 40 * cat.scale
+            }, this.rng, context);
+        }
+
+        separateCats(this.cats, this.rng, 80);
     }
 
     draw() {
