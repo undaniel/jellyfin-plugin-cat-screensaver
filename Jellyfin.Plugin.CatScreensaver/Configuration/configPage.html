@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Cat Screensaver</title>
+</head>
+<body>
+<div id="CatScreensaverConfigPage" data-role="page" class="page type-interior pluginConfigurationPage"
+     data-require="emby-input,emby-button,emby-checkbox">
+    <div data-role="content">
+        <div class="content-primary">
+            <form id="CatScreensaverConfigForm">
+                <h2>Cat Screensaver</h2>
+                <p class="fieldDescription">
+                    When the Jellyfin web interface stays idle, the screen fades to black and one or more
+                    original cats walk, sit, groom and fall asleep. Any key, click or movement wakes it.
+                </p>
+
+                <div id="FileTransformationWarning" class="paperList" style="display:none; padding:1em; margin:1em 0; border-left:4px solid #cc7a00;">
+                    <b>File Transformation is not registered.</b>
+                    <div class="fieldDescription" style="margin-top:.4em;">
+                        Install
+                        <a href="https://github.com/IAmParadox27/jellyfin-plugin-file-transformation" target="_blank" rel="noopener">
+                            IAmParadox27/jellyfin-plugin-file-transformation
+                        </a>
+                        and restart Jellyfin. Without it the script is not added to jellyfin-web.
+                        As a manual fallback, use a JavaScript injector plugin with
+                        <code>&lt;script src="/CatScreensaver/cat-screensaver.js" defer&gt;&lt;/script&gt;</code>.
+                    </div>
+                </div>
+
+                <p class="fieldDescription">
+                    Set Jellyfin's own screensaver (Dashboard &rarr; Display) to <b>None</b>, otherwise both
+                    overlays can compete.
+                </p>
+
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="Enabled" type="checkbox" is="emby-checkbox" />
+                        <span>Enable the cat screensaver</span>
+                    </label>
+                </div>
+
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="IdleTimeoutSeconds">Idle time before activation</label>
+                    <input id="IdleTimeoutSeconds" type="range" min="30" max="3600" step="10" style="width:100%;" />
+                    <div class="fieldDescription"><output id="IdleTimeoutSecondsValue"></output></div>
+                </div>
+
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="CatCount">Number of cats</label>
+                    <input id="CatCount" type="range" min="1" max="5" step="1" style="width:100%;" />
+                    <div class="fieldDescription"><output id="CatCountValue"></output></div>
+                </div>
+
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="CatScale">Cat size</label>
+                    <input id="CatScale" type="range" min="0.5" max="3" step="0.1" style="width:100%;" />
+                    <div class="fieldDescription"><output id="CatScaleValue"></output></div>
+                </div>
+
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="BackgroundDim">Background darkness</label>
+                    <input id="BackgroundDim" type="range" min="0" max="1" step="0.05" style="width:100%;" />
+                    <div class="fieldDescription"><output id="BackgroundDimValue"></output></div>
+                </div>
+
+                <h3>Palettes</h3>
+                <p class="fieldDescription">Assigned to cats in this order. If no palette is selected, orange is used.</p>
+                <div id="Palettes">
+                    <label class="emby-checkbox-label" style="display:block;">
+                        <input class="palette" type="checkbox" is="emby-checkbox" value="orange" />
+                        <span>Orange</span>
+                    </label>
+                    <label class="emby-checkbox-label" style="display:block;">
+                        <input class="palette" type="checkbox" is="emby-checkbox" value="black" />
+                        <span>Black</span>
+                    </label>
+                    <label class="emby-checkbox-label" style="display:block;">
+                        <input class="palette" type="checkbox" is="emby-checkbox" value="gray" />
+                        <span>Gray</span>
+                    </label>
+                    <label class="emby-checkbox-label" style="display:block;">
+                        <input class="palette" type="checkbox" is="emby-checkbox" value="white" />
+                        <span>White</span>
+                    </label>
+                    <label class="emby-checkbox-label" style="display:block;">
+                        <input class="palette" type="checkbox" is="emby-checkbox" value="calico" />
+                        <span>Calico</span>
+                    </label>
+                </div>
+
+                <h3>Behavior</h3>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="ShowClock" type="checkbox" is="emby-checkbox" />
+                        <span>Show a large clock</span>
+                    </label>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="DriftAntiBurnIn" type="checkbox" is="emby-checkbox" />
+                        <span>Move the clock every minute (anti burn-in)</span>
+                    </label>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="ActivateDuringMusic" type="checkbox" is="emby-checkbox" />
+                        <span>Allow the screensaver while music is playing</span>
+                    </label>
+                    <div class="fieldDescription">Video playback always blocks it.</div>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="AllowUserOptOut" type="checkbox" is="emby-checkbox" />
+                        <span>Let each browser opt out from the user menu</span>
+                    </label>
+                </div>
+
+                <div style="margin-top:1.5em;">
+                    <button is="emby-button" type="submit" class="raised button-submit block emby-button">
+                        <span>Save</span>
+                    </button>
+                    <button is="emby-button" type="button" id="Preview" class="raised" style="margin-top:.8em;">
+                        <span>Preview now</span>
+                    </button>
+                    <p class="fieldDescription" style="margin-top:.6em;">
+                        Preview uses the saved settings. Press any key or click anywhere to close it.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        (function () {
+            'use strict';
+
+            var pluginId = 'c1a7e4b2-5f6d-4e83-9b21-7a8c0d3e5f69';
+
+            function byId(id) {
+                return document.querySelector('#' + id);
+            }
+
+            function showRange(id, suffix, decimals) {
+                var value = parseFloat(byId(id).value);
+                var text = decimals ? value.toFixed(decimals) : String(Math.round(value));
+                byId(id + 'Value').textContent = text + suffix;
+            }
+
+            function setRange(id, value, suffix, decimals) {
+                byId(id).value = value;
+                showRange(id, suffix, decimals);
+            }
+
+            function loadStatus() {
+                ApiClient.getJSON(ApiClient.getUrl('CatScreensaver/Config')).then(function (publicConfig) {
+                    byId('FileTransformationWarning').style.display =
+                        publicConfig.FileTransformationAvailable === false ? 'block' : 'none';
+                }).catch(function () {
+                    // The warning is helpful, not required.
+                });
+            }
+
+            function loadConfig() {
+                return ApiClient.getPluginConfiguration(pluginId).then(function (loaded) {
+                    var config = loaded || {};
+
+                    byId('Enabled').checked = config.Enabled !== false;
+                    setRange('IdleTimeoutSeconds', config.IdleTimeoutSeconds || 180, ' s');
+                    setRange('CatCount', config.CatCount || 1, '');
+                    setRange('CatScale', config.CatScale || 1, 'x', 1);
+                    setRange('BackgroundDim', config.BackgroundDim === undefined ? 0.85 : config.BackgroundDim, '', 2);
+
+                    var palettes = config.CatPalettes || ['orange', 'black', 'gray', 'white', 'calico'];
+                    Array.prototype.forEach.call(document.querySelectorAll('.palette'), function (input) {
+                        input.checked = palettes.indexOf(input.value) !== -1;
+                    });
+
+                    byId('ShowClock').checked = config.ShowClock !== false;
+                    byId('DriftAntiBurnIn').checked = config.DriftAntiBurnIn !== false;
+                    byId('ActivateDuringMusic').checked = config.ActivateDuringMusic !== false;
+                    byId('AllowUserOptOut').checked = config.AllowUserOptOut !== false;
+
+                    loadStatus();
+                });
+            }
+
+            function collectConfig() {
+                var palettes = Array.prototype.map.call(
+                    document.querySelectorAll('.palette:checked'),
+                    function (input) { return input.value; });
+
+                return {
+                    Enabled: byId('Enabled').checked,
+                    IdleTimeoutSeconds: parseInt(byId('IdleTimeoutSeconds').value, 10) || 180,
+                    CatCount: parseInt(byId('CatCount').value, 10) || 1,
+                    CatScale: parseFloat(byId('CatScale').value) || 1,
+                    CatPalettes: palettes.length ? palettes : ['orange'],
+                    BackgroundDim: parseFloat(byId('BackgroundDim').value),
+                    ShowClock: byId('ShowClock').checked,
+                    ActivateDuringMusic: byId('ActivateDuringMusic').checked,
+                    DriftAntiBurnIn: byId('DriftAntiBurnIn').checked,
+                    AllowUserOptOut: byId('AllowUserOptOut').checked
+                };
+            }
+
+            function saveConfig(event) {
+                event.preventDefault();
+                Dashboard.showLoadingMsg();
+                ApiClient.updatePluginConfiguration(pluginId, collectConfig()).then(function (result) {
+                    Dashboard.processPluginConfigurationUpdateResult(result);
+                    loadStatus();
+                }).catch(function () {
+                    Dashboard.hideLoadingMsg();
+                    Dashboard.alert('Could not save the Cat Screensaver configuration.');
+                });
+            }
+
+            function preview() {
+                var target = window;
+                try {
+                    if (!target.CatScreensaver && window.parent && window.parent.CatScreensaver) {
+                        target = window.parent;
+                    }
+                } catch (error) {
+                    target = window;
+                }
+
+                if (!target.CatScreensaver || typeof target.CatScreensaver.preview !== 'function') {
+                    Dashboard.alert('The screensaver script is not loaded. Save, reload Jellyfin and check that File Transformation is installed.');
+                    return;
+                }
+
+                target.CatScreensaver.preview().then(function (opened) {
+                    if (!opened) {
+                        Dashboard.alert('Could not start the preview. Check the browser console and the server log.');
+                    }
+                });
+            }
+
+            byId('Preview').addEventListener('click', preview);
+            byId('CatScreensaverConfigForm').addEventListener('submit', saveConfig);
+
+            ['IdleTimeoutSeconds', 'CatCount', 'CatScale', 'BackgroundDim'].forEach(function (id) {
+                byId(id).addEventListener('input', function () {
+                    showRange(id,
+                        id === 'IdleTimeoutSeconds' ? ' s' : (id === 'CatScale' ? 'x' : ''),
+                        id === 'CatScale' || id === 'BackgroundDim' ? (id === 'CatScale' ? 1 : 2) : 0);
+                });
+            });
+
+            document.querySelector('#CatScreensaverConfigPage').addEventListener('pageshow', function () {
+                Dashboard.showLoadingMsg();
+                loadConfig().then(function () {
+                    Dashboard.hideLoadingMsg();
+                }).catch(function () {
+                    Dashboard.hideLoadingMsg();
+                    Dashboard.alert('Could not load the Cat Screensaver configuration.');
+                });
+            });
+        })();
+    </script>
+</div>
+</body>
+</html>

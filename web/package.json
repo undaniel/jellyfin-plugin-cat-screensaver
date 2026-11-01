@@ -1,0 +1,16 @@
+{
+  "name": "cat-screensaver-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Browser side of the Jellyfin Cat Screensaver plugin",
+  "scripts": {
+    "test": "vitest run",
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.5",
+    "jsdom": "^26.1.0",
+    "vitest": "^3.2.4"
+  }
+}

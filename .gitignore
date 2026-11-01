@@ -1,0 +1,11 @@
+bin/
+obj/
+TestResults/
+artifacts/
+repo/
+.venv/
+node_modules/
+*.user
+*.suo
+.vs/
+.idea/

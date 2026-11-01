@@ -1,0 +1,21 @@
+[
+    {
+        "guid": "c1a7e4b2-5f6d-4e83-9b21-7a8c0d3e5f69",
+        "name": "Cat Screensaver",
+        "description": "Fades the Jellyfin web UI to black after a configurable idle time and shows one or more original cats that walk, sit, groom, stretch and fall asleep. Any interaction wakes the UI. Requires the File Transformation plugin to inject the script into index.html.\n",
+        "overview": "Animated cats as a screensaver for the Jellyfin web interface",
+        "owner": "Daniel Carrasco",
+        "category": "General",
+        "versions": [
+            {
+                "version": "1.0.0.0",
+                "changelog": "First release: procedural cat art, five palettes, idle detection that respects video, music, hidden tabs and typing, per-browser opt-out, preview button, clock with anti burn-in, reduced motion, adaptive frame rate and File Transformation injection.\n",
+                "targetAbi": "12.0.0.0",
+                "sourceUrl": "https://github.com/undaniel/jellyfin-plugin-cat-screensaver/releases/download/v1.0.0.0/cat-screensaver_1.0.0.0.zip",
+                "checksum": "e13ad0cef6d94085e727c408b7e4fc7e",
+                "timestamp": "2026-11-01T16:35:35Z"
+            }
+        ],
+        "imageUrl": "https://raw.githubusercontent.com/undaniel/jellyfin-plugin-cat-screensaver/main/images/icon.png"
+    }
+]

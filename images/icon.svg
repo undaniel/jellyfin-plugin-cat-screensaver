@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#1d2b4a"/>
+      <stop offset="0.55" stop-color="#111a2c"/>
+      <stop offset="1" stop-color="#080c14"/>
+    </linearGradient>
+    <linearGradient id="fur" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#F2A44F"/>
+      <stop offset="1" stop-color="#D97A25"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.62" r="0.55">
+      <stop offset="0" stop-color="#E8913A" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#E8913A" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="moonCut">
+      <rect width="512" height="512" fill="white"/>
+      <circle cx="428" cy="104" r="46" fill="black"/>
+    </mask>
+  </defs>
+
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="url(#bg)"/>
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="none" stroke="#2b3a58" stroke-width="4"/>
+  <circle cx="256" cy="330" r="210" fill="url(#glow)"/>
+
+  <circle cx="399" cy="129" r="56" fill="#F6D2A8" opacity="0.92" mask="url(#moonCut)"/>
+  <circle cx="92" cy="104" r="3.5" fill="#F6D2A8" opacity="0.75"/>
+  <circle cx="142" cy="66" r="2.5" fill="#F6D2A8" opacity="0.55"/>
+  <circle cx="356" cy="64" r="3" fill="#F6D2A8" opacity="0.6"/>
+  <circle cx="434" cy="250" r="2.5" fill="#F6D2A8" opacity="0.45"/>
+  <circle cx="88" cy="226" r="2" fill="#F6D2A8" opacity="0.4"/>
+
+  <!-- Tail, drawn behind the body. -->
+  <path d="M 312 434 C 396 456 430 396 408 350 C 396 326 376 318 360 326"
+        fill="none" stroke="#7A3E10" stroke-width="32" stroke-linecap="round"/>
+  <path d="M 312 434 C 396 456 430 396 408 350 C 396 326 376 318 360 326"
+        fill="none" stroke="url(#fur)" stroke-width="22" stroke-linecap="round"/>
+
+  <!-- Body and belly. -->
+  <path d="M 194 452 C 176 404 190 342 228 316 C 246 304 266 304 284 316 C 322 342 336 404 318 452 Z"
+        fill="url(#fur)" stroke="#7A3E10" stroke-width="5"/>
+  <ellipse cx="256" cy="402" rx="62" ry="48" fill="#F6D2A8"/>
+
+  <!-- Paws. -->
+  <ellipse cx="211" cy="452" rx="31" ry="14" fill="#F6D2A8" stroke="#7A3E10" stroke-width="4"/>
+  <ellipse cx="301" cy="452" rx="31" ry="14" fill="#F6D2A8" stroke="#7A3E10" stroke-width="4"/>
+
+  <!-- Ears. -->
+  <path d="M 190 192 L 194 106 L 251 166 Z" fill="url(#fur)" stroke="#7A3E10" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M 261 166 L 318 106 L 322 192 Z" fill="url(#fur)" stroke="#7A3E10" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M 201 174 L 204 128 L 235 162 Z" fill="#F2A7A0"/>
+  <path d="M 277 162 L 308 128 L 311 174 Z" fill="#F2A7A0"/>
+
+  <!-- Head. -->
+  <circle cx="256" cy="238" r="84" fill="url(#fur)" stroke="#7A3E10" stroke-width="5"/>
+  <ellipse cx="256" cy="266" rx="42" ry="26" fill="#F6D2A8" opacity="0.55"/>
+
+  <!-- Closed, sleepy eyes. -->
+  <path d="M 209 238 Q 226 252 243 238" fill="none" stroke="#3A210B" stroke-width="7" stroke-linecap="round"/>
+  <path d="M 269 238 Q 286 252 303 238" fill="none" stroke="#3A210B" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Nose and mouth. -->
+  <path d="M 246 258 L 266 258 L 256 271 Z" fill="#E8788A"/>
+  <path d="M 256 271 Q 256 283 243 285" fill="none" stroke="#7A3E10" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 256 271 Q 256 283 269 285" fill="none" stroke="#7A3E10" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Whiskers. -->
+  <g stroke="#7A3E10" stroke-width="3.5" stroke-linecap="round" opacity="0.9">
+    <path d="M 222 266 L 166 255"/>
+    <path d="M 220 276 L 160 277"/>
+    <path d="M 224 286 L 170 298"/>
+    <path d="M 290 266 L 346 255"/>
+    <path d="M 292 276 L 352 277"/>
+    <path d="M 288 286 L 342 298"/>
+  </g>
+
+  <!-- Floating Zs. -->
+  <g fill="none" stroke="#F6D2A8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+    <path d="M 350 204 L 376 204 L 350 230 L 376 230"/>
+    <path d="M 386 164 L 416 164 L 386 194 L 416 194"/>
+    <path d="M 428 118 L 462 118 L 428 152 L 462 152"/>
+  </g>
+</svg>

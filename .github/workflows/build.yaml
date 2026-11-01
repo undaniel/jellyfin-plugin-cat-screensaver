@@ -1,0 +1,56 @@
+name: '🏗️ Build Plugin'
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**/*.md'
+      - 'images/**'
+      - 'docs/**'
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - '**/*.md'
+      - 'images/**'
+      - 'docs/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: JavaScript tests
+        working-directory: web
+        run: |
+          npm ci
+          npm test
+
+      - name: Build JavaScript bundle
+        working-directory: web
+        run: npm run build
+
+      - name: .NET tests
+        run: dotnet test Jellyfin.Plugin.CatScreensaver.slnx -p:SkipJsBuild=true
+
+      - name: .NET release build
+        run: dotnet build Jellyfin.Plugin.CatScreensaver.slnx -c Release -p:SkipJsBuild=true

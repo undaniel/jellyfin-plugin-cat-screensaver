@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Cat Screensaver - screenshot</title>
+    <style>
+        html, body { margin: 0; height: 100%; overflow: hidden; background: #000; }
+        canvas { display: block; width: 100vw; height: 100vh; }
+    </style>
+</head>
+<body>
+<canvas id="scene" width="1280" height="720"></canvas>
+<script type="module">
+    import { drawPose, paletteFor } from './src/art.js';
+
+    const canvas = document.getElementById('scene');
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+
+    const background = ctx.createLinearGradient(0, 0, 0, height);
+    background.addColorStop(0, '#1d2a44');
+    background.addColorStop(1, '#0a0e17');
+    ctx.fillStyle = background;
+    ctx.fillRect(0, 0, width, height);
+
+    // A dim hint of the Jellyfin library behind the overlay.
+    ctx.fillStyle = 'rgba(255,255,255,0.05)';
+    ctx.fillRect(48, 34, 150, 14);
+    ctx.fillRect(48, 58, 260, 8);
+
+    const colors = ['#33506e', '#5d4a6e', '#6e4a3f', '#2f5c55', '#4a4a6e', '#6e5c33'];
+    for (let i = 0; i < 6; i += 1) {
+        const x = 48 + i * 194;
+        ctx.fillStyle = colors[i];
+        ctx.fillRect(x, 120, 170, 250);
+        ctx.fillStyle = 'rgba(0,0,0,0.35)';
+        ctx.fillRect(x, 310, 170, 60);
+        ctx.fillStyle = 'rgba(255,255,255,0.12)';
+        ctx.fillRect(x + 14, 328, 110, 9);
+        ctx.fillRect(x + 14, 345, 70, 7);
+    }
+
+    ctx.fillStyle = 'rgba(0,0,0,0.85)';
+    ctx.fillRect(0, 0, width, height);
+
+    function cat(pose, frame, paletteName, seed, x, y, scale, flip) {
+        ctx.save();
+        ctx.translate(x, y);
+        if (flip) {
+            ctx.scale(-1, 1);
+        }
+        ctx.scale(scale, scale);
+        ctx.translate(-64, -96);
+        drawPose(ctx, pose, frame, paletteFor(paletteName, seed));
+        ctx.restore();
+    }
+
+    cat('walk', 1, 'orange', 1, 250, 690, 2.3, false);
+    cat('sit', 1, 'black', 2, 570, 700, 2.0, true);
+    cat('sleep', 0, 'calico', 3, 835, 706, 1.8, false);
+
+    ctx.fillStyle = 'rgba(255,255,255,0.78)';
+    ctx.font = '300 92px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText('03:17', width - 52, height - 42);
+
+    ctx.fillStyle = 'rgba(255,255,255,0.16)';
+    ctx.font = '400 17px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('Cat Screensaver', 48, height - 34);
+</script>
+</body>
+</html>

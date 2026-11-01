@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Jellyfin.Plugin.CatScreensaver/Jellyfin.Plugin.CatScreensaver.csproj" />
+  <Project Path="Jellyfin.Plugin.CatScreensaver.Tests/Jellyfin.Plugin.CatScreensaver.Tests.csproj" />
+</Solution>

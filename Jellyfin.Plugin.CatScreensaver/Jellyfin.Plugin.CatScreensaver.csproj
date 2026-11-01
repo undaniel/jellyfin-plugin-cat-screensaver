@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Jellyfin.Plugin.CatScreensaver</RootNamespace>
+    <AssemblyName>Jellyfin.Plugin.CatScreensaver</AssemblyName>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WebProjectDir>$(MSBuildProjectDirectory)/../web</WebProjectDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Jellyfin.Controller" Version="12.1.0">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Jellyfin.Model" Version="12.1.0">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Configuration\configPage.html" />
+    <EmbeddedResource Include="Configuration\configPage.html" />
+
+    <None Remove="Web\cat-screensaver.js" />
+    <EmbeddedResource Include="Web\cat-screensaver.js"
+                      LogicalName="Jellyfin.Plugin.CatScreensaver.Web.cat-screensaver.js" />
+  </ItemGroup>
+
+  <Target Name="BuildCatScreensaverWeb" BeforeTargets="BeforeBuild" Condition="'$(SkipJsBuild)' != 'true'">
+    <Exec Command="npm ci --no-audit --no-fund" WorkingDirectory="$(WebProjectDir)" />
+    <Exec Command="npm run build" WorkingDirectory="$(WebProjectDir)" />
+  </Target>
+
+</Project>
