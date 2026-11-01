@@ -8,7 +8,7 @@ import {
 } from './idle.js';
 import { Overlay } from './overlay.js';
 
-const VERSION = '1.0.0.4';
+const VERSION = '1.0.0.5';
 const BOOTED_KEY = '__catScreensaverBooted';
 const STORAGE_KEY = 'catScreensaver.disabled';
 const MENU_ATTRIBUTE = 'data-cat-screensaver-toggle';
@@ -178,7 +178,25 @@ function refreshMenuLabel() {
     }
 }
 
+function closeMuiMenu() {
+    const menu = document.querySelector('#app-user-menu');
+    if (!menu || menu.classList.contains('MuiModal-hidden')) {
+        return;
+    }
+
+    // MUI closes its menu on Escape; the injected item is not a React MenuItem.
+    menu.dispatchEvent(new KeyboardEvent('keydown', {
+        key: 'Escape',
+        code: 'Escape',
+        keyCode: 27,
+        which: 27,
+        bubbles: true,
+        cancelable: true
+    }));
+}
+
 function toggleOptOut(event) {
+    const inMuiMenu = Boolean(event.currentTarget?.closest?.('#app-user-menu'));
     event.preventDefault();
     event.stopPropagation();
     disabled = !isUserDisabled();
@@ -189,11 +207,20 @@ function toggleOptOut(event) {
     }
 
     refreshMenuLabel();
+
+    if (inMuiMenu) {
+        closeMuiMenu();
+    }
 }
 
 function ensureUserMenu() {
     try {
-        if (!config || config.AllowUserOptOut === false || !currentUserId() || !document.body) {
+        if (!config || !currentUserId() || !document.body) {
+            return;
+        }
+
+        if (config.AllowUserOptOut === false) {
+            document.querySelector(`[${MENU_ATTRIBUTE}]`)?.remove();
             return;
         }
 

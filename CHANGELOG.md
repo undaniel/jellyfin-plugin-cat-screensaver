@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0.5
+
+- Close the user menu after the opt-out toggle, and remove the entry if the admin
+  disables user opt-out.
+
 ## 1.0.0.4
 
 - Prefer the Jellyfin 12.4 user menu over the hidden legacy drawer, so the opt-out
