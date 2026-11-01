@@ -1,8 +1,10 @@
 # Changelog
 
-## 1.0.0.0
+## 1.0.0.1
 
 - First release.
+- Register the exact `index.html` key required by File Transformation when another
+  plugin already registered it, so the script is actually injected.
 - Original procedural cat art with orange, black, gray, white and calico palettes.
 - Seven-state behavior: walk, run, idle, sit, groom, stretch and sleep.
 - Idle detection that never activates during video, typing, hidden tabs, or music when

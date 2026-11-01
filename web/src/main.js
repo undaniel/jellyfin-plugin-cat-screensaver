@@ -8,7 +8,7 @@ import {
 } from './idle.js';
 import { Overlay } from './overlay.js';
 
-const VERSION = '1.0.0.0';
+const VERSION = '1.0.0.1';
 const BOOTED_KEY = '__catScreensaverBooted';
 const STORAGE_KEY = 'catScreensaver.disabled';
 const MENU_ATTRIBUTE = 'data-cat-screensaver-toggle';

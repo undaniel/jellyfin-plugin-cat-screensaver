@@ -23,6 +23,13 @@ public static class IndexTransformer
     public const string Marker = "cat-screensaver.js";
 
     /// <summary>
+    /// Exact File Transformation key for jellyfin-web's index. Other plugins
+    /// already register this exact key, and File Transformation only runs the
+    /// exact pipeline when one exists, so a regex would never be reached.
+    /// </summary>
+    public const string FileNamePattern = "index.html";
+
+    /// <summary>
     /// Returns the HTML with the script tag added before the closing body tag.
     /// The relative URL works both at the root and with a base path such as /jellyfin,
     /// because jellyfin-web serves index.html from /web/.

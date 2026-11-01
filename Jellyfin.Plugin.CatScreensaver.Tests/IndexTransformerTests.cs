@@ -42,6 +42,14 @@ public class IndexTransformerTests
     }
 
     [Fact]
+    public void RegistersTheExactIndexKeyThatOtherPluginsUse()
+    {
+        // File Transformation runs only the exact pipeline when one exists, so the
+        // registration cannot be a regex.
+        Assert.Equal("index.html", IndexTransformer.FileNamePattern);
+    }
+
+    [Fact]
     public void WorksWithABasePathBecauseTheUrlIsRelative()
     {
         var result = Transform("<html><body></body></html>");

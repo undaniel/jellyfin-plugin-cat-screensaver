@@ -124,7 +124,7 @@ public sealed class FileTransformationRegistrar : IHostedService
         var json = JsonSerializer.Serialize(new
         {
             id = Plugin.PluginId,
-            fileNamePattern = "index\\.html$",
+            fileNamePattern = IndexTransformer.FileNamePattern,
             callbackAssembly = typeof(IndexTransformer).Assembly.FullName,
             callbackClass = typeof(IndexTransformer).FullName,
             callbackMethod = nameof(IndexTransformer.Transform)

@@ -8,12 +8,12 @@
         "category": "General",
         "versions": [
             {
-                "version": "1.0.0.0",
+                "version": "1.0.0.1",
                 "changelog": "First release: procedural cat art, five palettes, idle detection that respects video, music, hidden tabs and typing, per-browser opt-out, preview button, clock with anti burn-in, reduced motion, adaptive frame rate and File Transformation injection.\n",
                 "targetAbi": "12.0.0.0",
-                "sourceUrl": "https://github.com/undaniel/jellyfin-plugin-cat-screensaver/releases/download/v1.0.0.0/cat-screensaver_1.0.0.0.zip",
-                "checksum": "e13ad0cef6d94085e727c408b7e4fc7e",
-                "timestamp": "2026-11-01T16:35:35Z"
+                "sourceUrl": "https://github.com/undaniel/jellyfin-plugin-cat-screensaver/releases/download/v1.0.0.1/cat-screensaver_1.0.0.1.zip",
+                "checksum": "0c70e4ef5a331d20c9fbc8885b20b40c",
+                "timestamp": "2026-11-01T16:40:58Z"
             }
         ],
         "imageUrl": "https://raw.githubusercontent.com/undaniel/jellyfin-plugin-cat-screensaver/main/images/icon.png"
