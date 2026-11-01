@@ -53,7 +53,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
                 Name = "CatScreensaver",
                 DisplayName = "Cat Screensaver",
                 MenuIcon = "nightlight",
-                EnableInMainMenu = false,
+                EnableInMainMenu = true,
                 EmbeddedResourcePath = string.Format(
                     CultureInfo.InvariantCulture,
                     "{0}.Configuration.configPage.html",
